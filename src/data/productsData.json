@@ -1,0 +1,88 @@
+{
+  "sellerId": "ritu_beauty_001",
+  "products": [
+    {
+      "productId": "prd_01",
+      "name": "Purple Summer Dress",
+      "price": 2499,
+      "description": "Elegant purple dress perfect for summer evenings. Made with breathable fabric and a flattering silhouette.",
+      "images": ["product-1.jpg", "product-1.jpg"],
+      "videos": [],
+      "specifications": ["100% Cotton", "Machine Washable", "Imported Fabric"],
+      "inventory": "In Stock",
+      "attributes": {
+        "Size": ["XS", "S", "M", "L", "XL"],
+        "Color": ["Purple", "Lavender", "Deep Purple"]
+      }
+    },
+    {
+      "productId": "prd_02",
+      "name": "Butterfly Graphic Tee",
+      "price": 899,
+      "description": "Modern white t-shirt with a stunning purple butterfly graphic design. Perfect for casual wear.",
+      "images": ["product-2.jpg", "product-2.jpg"],
+      "videos": [],
+      "specifications": ["100% Cotton", "Screen Printed", "Unisex Fit"],
+      "inventory": "In Stock",
+      "attributes": {
+        "Size": ["S", "M", "L", "XL", "XXL"],
+        "Color": ["White"]
+      }
+    },
+    {
+      "productId": "prd_03",
+      "name": "Pink Power Blazer",
+      "price": 3999,
+      "description": "Make a statement with this stunning pink blazer. Perfect for business meetings or casual outings.",
+      "images": ["product-3.jpg", "product-3.jpg"],
+      "videos": [],
+      "specifications": ["Premium Polyester", "Structured Fit", "Dry Clean Only"],
+      "inventory": "In Stock",
+      "attributes": {
+        "Size": ["XS", "S", "M", "L", "XL"],
+        "Color": ["Hot Pink", "Rose Pink"]
+      }
+    },
+    {
+      "productId": "prd_04",
+      "name": "Classic Denim Shorts",
+      "price": 1499,
+      "description": "Comfortable and stylish blue denim shorts. Perfect for summer days and casual outings.",
+      "images": ["product-4.jpg", "product-4.jpg"],
+      "videos": [],
+      "specifications": ["Denim Fabric", "Stretch Fit", "Machine Washable"],
+      "inventory": "In Stock",
+      "attributes": {
+        "Size": ["28", "30", "32", "34", "36"],
+        "Color": ["Blue Denim"]
+      }
+    },
+    {
+      "productId": "prd_05",
+      "name": "Purple Leather Handbag",
+      "price": 4999,
+      "description": "Luxurious purple leather handbag with spacious interior. Perfect accessory for any outfit.",
+      "images": ["product-5.jpg", "product-5.jpg"],
+      "videos": [],
+      "specifications": ["Genuine Leather", "Multiple Compartments", "Detachable Strap"],
+      "inventory": "Limited Stock",
+      "attributes": {
+        "Color": ["Purple", "Violet"]
+      }
+    },
+    {
+      "productId": "prd_06",
+      "name": "Purple Accent Sneakers",
+      "price": 2999,
+      "description": "Comfortable white sneakers with purple accents. Perfect for everyday wear and light activities.",
+      "images": ["product-6.jpg", "product-6.jpg"],
+      "videos": [],
+      "specifications": ["Synthetic Leather", "Cushioned Sole", "Breathable"],
+      "inventory": "In Stock",
+      "attributes": {
+        "Size": ["6", "7", "8", "9", "10", "11"],
+        "Color": ["White/Purple"]
+      }
+    }
+  ]
+}

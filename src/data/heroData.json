@@ -1,0 +1,19 @@
+{
+  "slides": [
+    {
+      "id": "slide_01",
+      "image": "hero-1.jpg",
+      "tagline": "Discover Your Style"
+    },
+    {
+      "id": "slide_02",
+      "image": "hero-2.jpg",
+      "tagline": "Premium Fashion Collection"
+    },
+    {
+      "id": "slide_03",
+      "image": "hero-3.jpg",
+      "tagline": "Elegance Redefined"
+    }
+  ]
+}

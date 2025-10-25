@@ -1,0 +1,24 @@
+{
+  "visible": true,
+  "title": "Our Story",
+  "stories": [
+    {
+      "id": "story_01",
+      "image": "story-1.jpg",
+      "title": "Happy Customers",
+      "description": "Join thousands of satisfied customers who trust Ritu Beauty for their fashion needs. We pride ourselves on quality and customer satisfaction."
+    },
+    {
+      "id": "story_02",
+      "image": "story-2.jpg",
+      "title": "Sustainable Fashion",
+      "description": "We believe in ethical fashion. Our products are made with eco-friendly materials and sustainable practices."
+    },
+    {
+      "id": "story_03",
+      "image": "story-3.jpg",
+      "title": "Crafted with Love",
+      "description": "Every piece is carefully designed and crafted by our talented team. Quality and style are at the heart of everything we do."
+    }
+  ]
+}
