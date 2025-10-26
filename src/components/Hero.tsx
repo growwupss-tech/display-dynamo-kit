@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight, Edit, Save, Plus, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Edit, Save, Plus, X, Trash2, ArrowUp, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@/context/UserContext";
 import heroDataImport from "@/data/heroData.json";
@@ -135,6 +135,24 @@ export default function Hero() {
     }
   };
 
+  const handleDeleteSlide = (index: number) => {
+    const updated = editedSlides.filter((_, i) => i !== index);
+    setEditedSlides(updated);
+    if (currentSlide >= updated.length) {
+      setCurrentSlide(Math.max(0, updated.length - 1));
+    }
+  };
+
+  const handleMoveSlide = (index: number, direction: "up" | "down") => {
+    const newIndex = direction === "up" ? index - 1 : index + 1;
+    if (newIndex < 0 || newIndex >= editedSlides.length) return;
+    
+    const updated = [...editedSlides];
+    [updated[index], updated[newIndex]] = [updated[newIndex], updated[index]];
+    setEditedSlides(updated);
+    setCurrentSlide(newIndex);
+  };
+
   const handleImageUpload = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -182,6 +200,35 @@ export default function Hero() {
           </Button>
           <Button onClick={() => setIsEditing(false)} size="icon" variant="outline">
             <X className="h-4 w-4" />
+          </Button>
+        </div>
+      )}
+
+      {isEditing && (
+        <div className="absolute top-4 left-4 z-10 flex gap-2 animate-slide-in-right">
+          <Button 
+            onClick={() => handleMoveSlide(currentSlide, "up")} 
+            size="icon" 
+            variant="secondary"
+            disabled={currentSlide === 0}
+          >
+            <ArrowUp className="h-4 w-4" />
+          </Button>
+          <Button 
+            onClick={() => handleMoveSlide(currentSlide, "down")} 
+            size="icon" 
+            variant="secondary"
+            disabled={currentSlide === editedSlides.length - 1}
+          >
+            <ArrowDown className="h-4 w-4" />
+          </Button>
+          <Button 
+            onClick={() => handleDeleteSlide(currentSlide)} 
+            size="icon" 
+            variant="destructive"
+            disabled={editedSlides.length <= 1}
+          >
+            <Trash2 className="h-4 w-4" />
           </Button>
         </div>
       )}
