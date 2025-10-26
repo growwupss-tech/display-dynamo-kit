@@ -18,6 +18,24 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent } from "@/components/ui/card";
 
+// Resolve asset URLs from JSON-friendly paths using Vite's import.meta.glob
+const assetModules = import.meta.glob("/src/assets/**/*.{jpg,jpeg,png,webp,svg}", { eager: true, as: "url" }) as Record<string, string>;
+const resolveAssetUrl = (input: string): string => {
+  if (!input) return input as string;
+  // Already a data URL, absolute HTTP(S), or public asset
+  if (/^data:|^https?:|^\/assets\//.test(input)) return input;
+  // Normalize ../assets/... -> src/assets/...
+  const normalized = input.replace(/^(\.\/|\.\.\/)+/, "src/").replace(/^@\/?/, "src/");
+  const filename = (normalized.split("/").pop() || normalized).toLowerCase();
+  // Try exact and filename-based matches
+  for (const [key, url] of Object.entries(assetModules)) {
+    const keyNorm = key.replace(/^\./, "").toLowerCase();
+    if (keyNorm.endsWith(normalized.toLowerCase())) return url as string;
+    if (keyNorm.endsWith("/" + filename)) return url as string;
+  }
+  return input;
+};
+
 interface HeroImage {
   id: string;
   url: string;
@@ -177,7 +195,7 @@ export default function Hero() {
                 index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-105"
               }`}
             >
-              <img src={slide.image} alt={slide.tagline} className="w-full h-full object-cover" />
+              <img src={resolveAssetUrl(slide.image)} alt={slide.tagline} className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
             </div>
           );
@@ -311,12 +329,12 @@ export default function Hero() {
                             setSelectedImage(image);
                             setNewSlide((prev) => ({
                               ...prev,
-                              image: image.url,
+                              image: resolveAssetUrl(image.url),
                             }));
                           }}
                         >
                           <CardContent className="p-2">
-                            <img src={image.url} alt={image.title} className="w-full h-32 object-cover rounded-md" />
+                            <img src={resolveAssetUrl(image.url)} alt={image.title} className="w-full h-32 object-cover rounded-md" />
                             <div className="mt-2 space-y-1">
                               <h3 className="font-medium text-sm">{image.title}</h3>
                               <p className="text-xs text-muted-foreground">{image.description}</p>
