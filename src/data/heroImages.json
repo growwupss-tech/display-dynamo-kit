@@ -1,0 +1,94 @@
+{
+  "categories": [
+    {
+      "id": "general",
+      "name": "General Patterns",
+      "images": [
+        {
+          "id": "pattern1",
+          "url": "../assets/hero-images/general/pattern1.jpg",
+          "title": "Abstract Purple Wave",
+          "description": "Modern abstract pattern with purple and white waves"
+        },
+        {
+          "id": "pattern2",
+          "url": "../assets/hero-images/general/pattern2.jpg",
+          "title": "Geometric Shapes",
+          "description": "Clean geometric pattern with purple accents"
+        }
+      ]
+    },
+    {
+      "id": "bakery",
+      "name": "Bakery & Cakes",
+      "images": [
+        {
+          "id": "bakery1",
+          "url": "../assets/hero-images/bakery/cake1.jpg",
+          "title": "Purple Velvet Cake",
+          "description": "Elegant purple-themed cake with white frosting"
+        },
+        {
+          "id": "bakery2",
+          "url": "../assets/hero-images/bakery/pastry1.jpg",
+          "title": "Lavender Pastries",
+          "description": "Assorted pastries with purple accents"
+        }
+      ]
+    },
+    {
+      "id": "restaurant",
+      "name": "Restaurant & Dining",
+      "images": [
+        {
+          "id": "restaurant1",
+          "url": "../assets/hero-images/restaurant/dining1.jpg",
+          "title": "Elegant Dining",
+          "description": "Modern restaurant interior with purple lighting"
+        },
+        {
+          "id": "restaurant2",
+          "url": "../assets/hero-images/restaurant/food1.jpg",
+          "title": "Gourmet Presentation",
+          "description": "Beautifully plated dish with purple garnish"
+        }
+      ]
+    },
+    {
+      "id": "fashion",
+      "name": "Fashion & Clothing",
+      "images": [
+        {
+          "id": "fashion1",
+          "url": "../assets/hero-images/fashion/style1.jpg",
+          "title": "Purple Collection",
+          "description": "Modern fashion with purple theme"
+        },
+        {
+          "id": "fashion2",
+          "url": "../assets/hero-images/fashion/accessories1.jpg",
+          "title": "Accessories Display",
+          "description": "Fashion accessories in purple and white"
+        }
+      ]
+    },
+    {
+      "id": "electronics",
+      "name": "Electronics & Gadgets",
+      "images": [
+        {
+          "id": "electronics1",
+          "url": "../assets/hero-images/electronics/device1.jpg",
+          "title": "Modern Devices",
+          "description": "Sleek electronics with purple lighting"
+        },
+        {
+          "id": "electronics2",
+          "url": "../assets/hero-images/electronics/setup1.jpg",
+          "title": "Tech Setup",
+          "description": "Clean workspace with purple-lit devices"
+        }
+      ]
+    }
+  ]
+}

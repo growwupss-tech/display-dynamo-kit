@@ -12,9 +12,9 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border transition-smooth">
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-2 sm:px-4 py-4">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link to="/" className="flex items-center gap-3 group pl-0">
             <div className="w-12 h-12 rounded-full bg-gradient-hero p-1 shadow-glow group-hover:scale-110 transition-bounce">
               <img
                 src={logo}
@@ -22,7 +22,7 @@ export default function Navbar() {
                 className="w-full h-full object-cover rounded-full"
               />
             </div>
-            <span className="text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent">
+            <span className="text-2xl font-bold text-purple-500 hover:text-purple-600 transition-colors">
               {sellerData.businessName}
             </span>
           </Link>

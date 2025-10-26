@@ -1,24 +1,42 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, Edit, Save, Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@/context/UserContext";
 import heroDataImport from "@/data/heroData.json";
-import hero1 from "@/assets/hero-1.jpg";
-import hero2 from "@/assets/hero-2.jpg";
-import hero3 from "@/assets/hero-3.jpg";
+import heroImagesData from "@/data/heroImages.json";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  SelectGroup,
+  SelectLabel,
+} from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Card, CardContent } from "@/components/ui/card";
 
-const imageMap: Record<string, string> = {
-  "hero-1.jpg": hero1,
-  "hero-2.jpg": hero2,
-  "hero-3.jpg": hero3,
-};
+interface HeroImage {
+  id: string;
+  url: string;
+  title: string;
+  description: string;
+}
+
+interface Category {
+  id: string;
+  name: string;
+  images: HeroImage[];
+}
 
 interface Slide {
   id: string;
   image: string;
   tagline: string;
+  // optional text color for the tagline (defaults to 'white' when missing)
+  textColor?: "white" | "purple";
 }
 
 export default function Hero() {
@@ -29,6 +47,21 @@ export default function Hero() {
   const [editedSlides, setEditedSlides] = useState<Slide[]>([]);
   const [uploadDialogOpen, setUploadDialogOpen] = useState(false);
   const [newSlide, setNewSlide] = useState<Partial<Slide>>({});
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [selectedImage, setSelectedImage] = useState<HeroImage | null>(null);
+  const timerRef = useRef<NodeJS.Timeout>();
+
+  // Function to reset the auto-slide timer
+  const resetTimer = () => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+    if (!isEditing && heroData.slides.length > 0) {
+      timerRef.current = setInterval(() => {
+        setCurrentSlide((prev) => (prev + 1) % heroData.slides.length);
+      }, 5000);
+    }
+  };
 
   useEffect(() => {
     const stored = localStorage.getItem("heroData");
@@ -44,12 +77,13 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
-    if (heroData.slides.length === 0) return;
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroData.slides.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [heroData.slides.length]);
+    resetTimer();
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
+  }, [heroData.slides.length, isEditing]);
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -75,6 +109,7 @@ export default function Hero() {
         id: `slide_${Date.now()}`,
         image: newSlide.image,
         tagline: newSlide.tagline,
+        textColor: (newSlide as Slide).textColor || "white",
       };
       setEditedSlides([...editedSlides, slide]);
       setNewSlide({});
@@ -95,21 +130,20 @@ export default function Hero() {
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % heroData.slides.length);
+    resetTimer(); // Reset timer when manually changing slides
   };
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + heroData.slides.length) % heroData.slides.length);
+    resetTimer(); // Reset timer when manually changing slides
   };
 
   if (heroData.slides.length === 0) return null;
 
   const currentSlideData = isEditing ? editedSlides[currentSlide] : heroData.slides[currentSlide];
-  const currentImage = currentSlideData.image.startsWith("data:") 
-    ? currentSlideData.image 
-    : imageMap[currentSlideData.image] || currentSlideData.image;
 
   return (
-    <section className="relative h-[70vh] md:h-[80vh] overflow-hidden group">
+    <section className="relative h-[90vh] md:h-screen overflow-hidden group">
       {isAuthenticated && !isEditing && (
         <Button
           onClick={handleEdit}
@@ -136,24 +170,14 @@ export default function Hero() {
 
       <div className="relative h-full">
         {heroData.slides.map((slide, index) => {
-          const slideImage = slide.image.startsWith("data:") 
-            ? slide.image 
-            : imageMap[slide.image] || slide.image;
-          
           return (
             <div
               key={slide.id}
               className={`absolute inset-0 transition-all duration-1000 ${
-                index === currentSlide
-                  ? "opacity-100 scale-100"
-                  : "opacity-0 scale-105"
+                index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-105"
               }`}
             >
-              <img
-                src={slideImage}
-                alt={slide.tagline}
-                className="w-full h-full object-cover"
-              />
+              <img src={slide.image} alt={slide.tagline} className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
             </div>
           );
@@ -169,6 +193,25 @@ export default function Hero() {
                 onChange={(e) => handleSlideChange(currentSlide, "tagline", e.target.value)}
                 className="text-4xl md:text-6xl font-bold text-center bg-background/50 backdrop-blur-sm"
               />
+              <div className="flex items-center justify-center gap-2">
+                <span className="text-sm">Text color:</span>
+                <Button
+                  size="sm"
+                  variant={editedSlides[currentSlide]?.textColor === "white" ? "default" : "outline"}
+                  onClick={() => handleSlideChange(currentSlide, "textColor", "white")}
+                  className="bg-white/90 text-black"
+                >
+                  White
+                </Button>
+                <Button
+                  size="sm"
+                  variant={editedSlides[currentSlide]?.textColor === "purple" ? "default" : "outline"}
+                  onClick={() => handleSlideChange(currentSlide, "textColor", "purple")}
+                  className="bg-gradient-to-r from-purple-400 to-purple-600 text-white"
+                >
+                  Purple
+                </Button>
+              </div>
               <Input
                 type="file"
                 accept="image/*"
@@ -177,7 +220,13 @@ export default function Hero() {
               />
             </div>
           ) : (
-            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-hero bg-clip-text text-transparent drop-shadow-lg animate-scale-in">
+            <h1
+              className={`text-5xl md:text-7xl font-bold animate-scale-in ${
+                (currentSlideData.textColor || "white") === "purple"
+                  ? "text-purple-400 [text-shadow:2px_2px_8px_rgba(0,0,0,0.6)]"
+                  : "text-white [text-shadow:2px_2px_8px_rgba(0,0,0,0.6)]"
+              }`}
+            >
               {currentSlideData.tagline}
             </h1>
           )}
@@ -208,40 +257,103 @@ export default function Hero() {
             key={index}
             onClick={() => setCurrentSlide(index)}
             className={`h-2 rounded-full transition-smooth ${
-              index === currentSlide
-                ? "w-8 bg-primary shadow-glow"
-                : "w-2 bg-background/50 hover:bg-background/80"
+              index === currentSlide ? "w-8 bg-primary shadow-glow" : "w-2 bg-background/50 hover:bg-background/80"
             }`}
           />
         ))}
       </div>
 
       <Dialog open={uploadDialogOpen} onOpenChange={setUploadDialogOpen}>
-        <DialogContent className="animate-scale-in">
+        <DialogContent className="animate-scale-in max-w-4xl max-h-[80vh]">
           <DialogHeader>
             <DialogTitle>Add New Slide</DialogTitle>
           </DialogHeader>
-          <div className="space-y-4">
+          <div className="space-y-6">
             <Input
               placeholder="Tagline"
               value={newSlide.tagline || ""}
               onChange={(e) => setNewSlide({ ...newSlide, tagline: e.target.value })}
+              className="text-lg"
             />
-            <Input
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  const reader = new FileReader();
-                  reader.onloadend = () => {
-                    setNewSlide({ ...newSlide, image: reader.result as string });
-                  };
-                  reader.readAsDataURL(file);
-                }
-              }}
-            />
-            <Button onClick={handleAddSlide} className="w-full animate-bounce-in">
+
+            <div className="space-y-4">
+              <Select
+                value={selectedCategory}
+                onValueChange={(value) => {
+                  setSelectedCategory(value);
+                  setSelectedImage(null);
+                }}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select image category" />
+                </SelectTrigger>
+                <SelectContent>
+                  {heroImagesData.categories.map((category) => (
+                    <SelectItem key={category.id} value={category.id}>
+                      {category.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              {selectedCategory && (
+                <ScrollArea className="h-[400px] rounded-md border p-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    {heroImagesData.categories
+                      .find((c) => c.id === selectedCategory)
+                      ?.images.map((image) => (
+                        <Card
+                          key={image.id}
+                          className={`cursor-pointer transition-all hover:scale-105 ${
+                            selectedImage?.id === image.id ? "ring-2 ring-primary ring-offset-2" : ""
+                          }`}
+                          onClick={() => {
+                            setSelectedImage(image);
+                            setNewSlide((prev) => ({
+                              ...prev,
+                              image: image.url,
+                            }));
+                          }}
+                        >
+                          <CardContent className="p-2">
+                            <img src={image.url} alt={image.title} className="w-full h-32 object-cover rounded-md" />
+                            <div className="mt-2 space-y-1">
+                              <h3 className="font-medium text-sm">{image.title}</h3>
+                              <p className="text-xs text-muted-foreground">{image.description}</p>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                  </div>
+                </ScrollArea>
+              )}
+            </div>
+
+            <div className="flex items-center justify-center gap-2">
+              <span className="text-sm">Text color:</span>
+              <Button
+                size="sm"
+                variant={!newSlide.textColor || newSlide.textColor === "white" ? "default" : "outline"}
+                onClick={() => setNewSlide({ ...newSlide, textColor: "white" })}
+                className="bg-white/90 text-black"
+              >
+                White
+              </Button>
+              <Button
+                size="sm"
+                variant={newSlide.textColor === "purple" ? "default" : "outline"}
+                onClick={() => setNewSlide({ ...newSlide, textColor: "purple" })}
+                className="bg-gradient-to-r from-purple-400 to-purple-600 text-white"
+              >
+                Purple
+              </Button>
+            </div>
+
+            <Button
+              onClick={handleAddSlide}
+              className="w-full animate-bounce-in"
+              disabled={!newSlide.tagline || !newSlide.image}
+            >
               Add Slide
             </Button>
           </div>
