@@ -205,11 +205,11 @@ export default function Hero() {
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="text-center space-y-6 px-4 animate-fade-in">
           {isEditing ? (
-            <div className="max-w-2xl mx-auto space-y-4">
+            <div className="max-w-4xl mx-auto space-y-4 w-full px-8">
               <Input
                 value={editedSlides[currentSlide]?.tagline || ""}
                 onChange={(e) => handleSlideChange(currentSlide, "tagline", e.target.value)}
-                className="text-4xl md:text-6xl font-bold text-center bg-background/50 backdrop-blur-sm"
+                className="text-4xl md:text-6xl font-bold text-center bg-background/50 backdrop-blur-sm w-full"
               />
               <div className="flex items-center justify-center gap-2">
                 <span className="text-sm">Text color:</span>
@@ -282,11 +282,12 @@ export default function Hero() {
       </div>
 
       <Dialog open={uploadDialogOpen} onOpenChange={setUploadDialogOpen}>
-        <DialogContent className="animate-scale-in max-w-4xl max-h-[80vh]">
+        <DialogContent className="animate-scale-in max-w-4xl max-h-[85vh] overflow-hidden flex flex-col">
           <DialogHeader>
             <DialogTitle>Add New Slide</DialogTitle>
           </DialogHeader>
-          <div className="space-y-6">
+          <ScrollArea className="flex-1 pr-4">
+            <div className="space-y-6 pb-4">
             <Input
               placeholder="Tagline"
               value={newSlide.tagline || ""}
@@ -374,7 +375,8 @@ export default function Hero() {
             >
               Add Slide
             </Button>
-          </div>
+            </div>
+          </ScrollArea>
         </DialogContent>
       </Dialog>
     </section>

@@ -15,6 +15,24 @@
           "url": "../assets/hero-images/general/pattern2.jpg",
           "title": "Geometric Shapes",
           "description": "Clean geometric pattern with purple accents"
+        },
+        {
+          "id": "pattern3",
+          "url": "../assets/hero-images/general/pattern3.jpg",
+          "title": "Liquid Gradient",
+          "description": "Abstract liquid gradient with purple and white swirls"
+        },
+        {
+          "id": "pattern4",
+          "url": "../assets/hero-images/general/pattern4.jpg",
+          "title": "Marble Texture",
+          "description": "Minimalist purple and white marble texture"
+        },
+        {
+          "id": "pattern5",
+          "url": "../assets/hero-images/general/pattern5.jpg",
+          "title": "Dreamy Waves",
+          "description": "Soft purple and white gradient waves with sparkle"
         }
       ]
     },
@@ -33,6 +51,24 @@
           "url": "../assets/hero-images/bakery/pastry1.jpg",
           "title": "Lavender Pastries",
           "description": "Assorted pastries with purple accents"
+        },
+        {
+          "id": "bakery3",
+          "url": "../assets/hero-images/bakery/cake2.jpg",
+          "title": "Berry Layer Cake",
+          "description": "Layered purple velvet cake with berries and cream"
+        },
+        {
+          "id": "bakery4",
+          "url": "../assets/hero-images/bakery/pastry2.jpg",
+          "title": "Purple Macarons",
+          "description": "Stack of elegant purple macarons with white frosting"
+        },
+        {
+          "id": "bakery5",
+          "url": "../assets/hero-images/bakery/dessert1.jpg",
+          "title": "Ombre Cupcakes",
+          "description": "Artisan purple ombre cupcakes with white toppings"
         }
       ]
     },
@@ -51,6 +87,24 @@
           "url": "../assets/hero-images/restaurant/food1.jpg",
           "title": "Gourmet Presentation",
           "description": "Beautifully plated dish with purple garnish"
+        },
+        {
+          "id": "restaurant3",
+          "url": "../assets/hero-images/restaurant/dining2.jpg",
+          "title": "Modern Bar Area",
+          "description": "Restaurant bar with purple neon accents and white countertops"
+        },
+        {
+          "id": "restaurant4",
+          "url": "../assets/hero-images/restaurant/table1.jpg",
+          "title": "Table Setting",
+          "description": "Elegant table setting with purple napkins and ambient lighting"
+        },
+        {
+          "id": "restaurant5",
+          "url": "../assets/hero-images/restaurant/food2.jpg",
+          "title": "Dessert Art",
+          "description": "Gourmet dessert with purple edible flowers"
         }
       ]
     },
@@ -69,6 +123,24 @@
           "url": "../assets/hero-images/fashion/accessories1.jpg",
           "title": "Accessories Display",
           "description": "Fashion accessories in purple and white"
+        },
+        {
+          "id": "fashion3",
+          "url": "../assets/hero-images/fashion/style2.jpg",
+          "title": "Fashion Flat Lay",
+          "description": "Purple and white fashion pieces in minimal composition"
+        },
+        {
+          "id": "fashion4",
+          "url": "../assets/hero-images/fashion/accessories2.jpg",
+          "title": "Sneakers & Accessories",
+          "description": "Purple sneakers and fashion accessories display"
+        },
+        {
+          "id": "fashion5",
+          "url": "../assets/hero-images/fashion/clothing1.jpg",
+          "title": "Evening Dress",
+          "description": "Elegant purple evening dress with accent lighting"
         }
       ]
     },
@@ -87,6 +159,24 @@
           "url": "../assets/hero-images/electronics/setup1.jpg",
           "title": "Tech Setup",
           "description": "Clean workspace with purple-lit devices"
+        },
+        {
+          "id": "electronics3",
+          "url": "../assets/hero-images/electronics/device2.jpg",
+          "title": "Smartphone & Tablet",
+          "description": "Modern devices with purple glowing screens"
+        },
+        {
+          "id": "electronics4",
+          "url": "../assets/hero-images/electronics/gadgets1.jpg",
+          "title": "Wireless Accessories",
+          "description": "Earbuds and smartwatch with purple LED lighting"
+        },
+        {
+          "id": "electronics5",
+          "url": "../assets/hero-images/electronics/setup2.jpg",
+          "title": "Gaming Setup",
+          "description": "Gaming setup with purple RGB keyboard and underglow"
         }
       ]
     }
