@@ -282,12 +282,12 @@ export default function Hero() {
       </div>
 
       <Dialog open={uploadDialogOpen} onOpenChange={setUploadDialogOpen}>
-        <DialogContent className="animate-scale-in max-w-4xl max-h-[85vh] overflow-hidden flex flex-col">
-          <DialogHeader>
+        <DialogContent className="animate-scale-in max-w-4xl h-[85vh] flex flex-col">
+          <DialogHeader className="flex-shrink-0">
             <DialogTitle>Add New Slide</DialogTitle>
           </DialogHeader>
-          <ScrollArea className="flex-1 pr-4">
-            <div className="space-y-6 pb-4">
+          <ScrollArea className="flex-1 overflow-y-auto pr-3">
+            <div className="space-y-6 pb-6">
             <Input
               placeholder="Tagline"
               value={newSlide.tagline || ""}
